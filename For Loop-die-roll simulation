@@ -1,0 +1,18 @@
+import random
+
+def simulate_die_rolls(n_rolls=20, seed=None):
+    if seed is not None:
+        random.seed(seed)
+    rolls = [random.randint(1, 6) for _ in range(n_rolls)]
+    count_six = rolls.count(6)
+    count_one = rolls.count(1)
+    # count two 6s in a row
+    two_six_in_row = sum(1 for i in range(len(rolls)-1) if rolls[i] == 6 and rolls[i+1] == 6)
+    return rolls, count_six, count_one, two_six_in_row
+
+# Example run
+rolls, six_count, one_count, two6 = simulate_die_rolls(25, seed=42)
+print("Rolls:", rolls)
+print("Number of 6s:", six_count)
+print("Number of 1s:", one_count)
+print("Number of times two 6s in a row:", two6)
