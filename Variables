@@ -1,0 +1,25 @@
+# Task 1: Variables
+
+# 1. Create variable named pi and store 22/7; check type
+pi = 22/7
+print("pi =", pi)
+print("type(pi) =", type(pi))   # expected <class 'float'>
+
+# 2. Create a variable called for and assign 4 -> this will fail because 'for' is a Python keyword.
+# The following line is invalid and will raise a SyntaxError if uncommented:
+# for = 4
+
+# Instead, show correct approach: use for_var
+for_var = 4
+print("for_var =", for_var)
+
+# Explanation printed:
+print("\nExplanation: 'for' is a reserved keyword in Python (used for loops). "
+      "You cannot use it as a variable name. Use another name like 'for_var'.")
+
+# 3. Simple Interest calculation
+P = 10000   # example principal
+R = 5       # annual rate percent
+T = 3       # years
+simple_interest = (P * R * T) / 100
+print(f"\nSimple Interest for P={P}, R={R}%, T={T} years = {simple_interest}")
