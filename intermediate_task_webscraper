@@ -1,9 +1,3 @@
-# intermediate_task_webscraper.py
-"""
-Intermediate Task 1 – Web Scraper  
-Using BeautifulSoup to extract data from a website.
-"""
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -19,14 +13,22 @@ def scrape_python_news():
 
     print("\nLatest Python.org News Headlines:\n")
 
-    # Extract news items
-    news_items = soup.select(".list-recent-posts li")
+    # UPDATED CSS SELECTOR (works in 2025)
+    news_section = soup.find("ul", class_="list-widgets row")
 
-    for idx, item in enumerate(news_items, start=1):
-        title = item.find("a").text.strip()
-        date = item.find("time").text.strip()
+    if not news_section:
+        print("No news section found. Website layout changed.")
+        return
 
-        print(f"{idx}. {title}  —  ({date})")
+    items = news_section.find_all("li")
+
+    if not items:
+        print("No news items found.")
+        return
+
+    for i, item in enumerate(items[:5], start=1):
+        title = item.get_text(strip=True)
+        print(f"{i}. {title}")
 
 if __name__ == "__main__":
     scrape_python_news()
