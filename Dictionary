@@ -1,0 +1,41 @@
+# 6.1 Friends list -> list of tuples (name, length)
+friends = ["Aditya", "Priya", "Rahul", "Sneha", "Karthik"]
+name_length_tuples = [(name, len(name)) for name in friends]
+print("Name-length tuples:", name_length_tuples)
+
+# 6.2 Trip expense dictionaries and analysis
+your_expenses = {
+    "Hotel": 1200,
+    "Food": 800,
+    "Transportation": 500,
+    "Attractions": 300,
+    "Miscellaneous": 200
+}
+
+partner_expenses = {
+    "Hotel": 1000,
+    "Food": 900,
+    "Transportation": 600,
+    "Attractions": 400,
+    "Miscellaneous": 150
+}
+
+def analyze_expenses(a, b):
+    total_a = sum(a.values())
+    total_b = sum(b.values())
+    print("\nYour total:", total_a)
+    print("Partner total:", total_b)
+    if total_a > total_b:
+        print("You spent more by", total_a - total_b)
+    elif total_b > total_a:
+        print("Partner spent more by", total_b - total_a)
+    else:
+        print("Both spent equal amounts")
+    # find largest absolute difference in a category
+    all_categories = set(a.keys()) | set(b.keys())
+    diffs = {cat: abs(a.get(cat,0) - b.get(cat,0)) for cat in all_categories}
+    max_cat = max(diffs, key=diffs.get)
+    print("Category with largest difference:", max_cat, "Difference:", diffs[max_cat])
+    return total_a, total_b, max_cat, diffs[max_cat]
+
+analyze_expenses(your_expenses, partner_expenses)
