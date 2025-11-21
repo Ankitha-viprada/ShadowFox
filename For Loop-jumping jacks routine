@@ -1,0 +1,42 @@
+def jumping_jacks_interactive():
+    completed = 0
+    total = 100
+    per_set = 10
+    while completed < total:
+        # simulate doing the set
+        completed += per_set
+        # Ask the user (interactive)
+        ans = input(f"You completed {completed} jumping jacks. Are you tired? (y/n): ").strip().lower()
+        if ans in ('y', 'yes'):
+            skip = input("Do you want to skip the remaining sets? (y/n): ").strip().lower()
+            if skip in ('y', 'yes'):
+                break
+            else:
+                continue
+    print(f"You completed a total of {completed} jumping jacks.")
+    if completed >= total:
+        print("Congratulations! You completed the workout.")
+
+# Non-interactive simulation version which you can run to demo different user responses:
+def jumping_jacks_simulated(responses):
+    completed = 0
+    total = 100
+    per_set = 10
+    idx = 0
+    while completed < total:
+        completed += per_set
+        # get response from provided list (defaults to 'n' if out of responses)
+        ans = responses[idx] if idx < len(responses) else 'n'
+        idx += 1
+        if ans in ('y','yes'):
+            skip = responses[idx] if idx < len(responses) else 'y'
+            idx += 1
+            if skip in ('y','yes'):
+                break
+            else:
+                continue
+    return completed
+
+# Example simulated runs:
+print("\nSimulated jumping jacks run 1 (user stops after 30):", jumping_jacks_simulated(['n','n','y','y']))
+# Explanation: sets -> answers mapping shown in code logic
