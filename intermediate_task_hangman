@@ -1,0 +1,129 @@
+# intermediate_task_hangman.py
+"""
+Intermediate Task 2 – Hangman Game
+Word-guessing game with visual hangman progress and hints.
+"""
+
+import random
+
+HANGMAN_PICS = [
+    """
+      +---+
+      |   |
+          |
+          |
+          |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+          |
+          |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+      |   |
+          |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+     /|   |
+          |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+     /|\\  |
+          |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+     /|\\  |
+     /    |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+     /|\\  |
+     / \\  |
+          |
+    =========
+    """
+]
+
+# Words with hints
+WORD_BANK = {
+    "python": "A programming language you are learning.",
+    "shadow": "First part of your internship company name.",
+    "computer": "A device used for coding.",
+    "internet": "You need this to access GitHub & LinkedIn.",
+    "jupyter": "A notebook used for data science."
+}
+
+def hangman():
+    word, hint = random.choice(list(WORD_BANK.items()))
+    guessed = set()
+    wrong = 0
+    max_wrong = len(HANGMAN_PICS) - 1
+
+    print("Welcome to Hangman!")
+    print("Hint:", hint)
+
+    display_word = ["_"] * len(word)
+
+    while wrong < max_wrong:
+        print(HANGMAN_PICS[wrong])
+        print("Word:", " ".join(display_word))
+        print("Guessed letters:", ", ".join(sorted(guessed)))
+        
+        guess = input("\nEnter a letter: ").lower()
+
+        if not guess.isalpha() or len(guess) != 1:
+            print("Please enter a single valid letter.")
+            continue
+
+        if guess in guessed:
+            print("You already guessed that letter.")
+            continue
+
+        guessed.add(guess)
+
+        if guess in word:
+            print("Good guess!")
+            for i, ch in enumerate(word):
+                if ch == guess:
+                    display_word[i] = guess
+        else:
+            wrong += 1
+            print("Wrong guess!")
+
+        if "_" not in display_word:
+            print("\n🎉 YOU WIN! The word was:", word)
+            return
+
+    print(HANGMAN_PICS[-1])
+    print("\n❌ GAME OVER! The word was:", word)
+
+if __name__ == "__main__":
+    hangman()
