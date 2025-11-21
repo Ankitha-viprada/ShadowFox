@@ -1,0 +1,42 @@
+# Task 3: List - Justice League operations
+justice_league = ["Superman", "Batman", "Wonder Woman", "Flash", "Aquaman", "Green Lantern"]
+print("Initial:", justice_league)
+
+# 1. Number of members
+print("Number of members:", len(justice_league))
+
+# 2. Add Batgirl and Nightwing
+justice_league.extend(["Batgirl", "Nightwing"])
+print("After adding Batgirl & Nightwing:", justice_league)
+
+# 3. Move Wonder Woman to the beginning
+if "Wonder Woman" in justice_league:
+    justice_league.remove("Wonder Woman")
+    justice_league.insert(0, "Wonder Woman")
+print("After moving Wonder Woman to beginning:", justice_league)
+
+# 4. Separate Aquaman and Flash by inserting someone between them.
+# Current positions: find Aquaman and Flash and put 'Green Lantern' or 'Superman' between them.
+# We'll choose "Green Lantern" (if present) to place between them.
+try:
+    aquaman_idx = justice_league.index("Aquaman")
+    flash_idx = justice_league.index("Flash")
+    # ensure Aquaman comes before Flash; if not, swap
+    if aquaman_idx > flash_idx:
+        aquaman_idx, flash_idx = flash_idx, aquaman_idx
+    # remove Green Lantern and re-insert right after Aquaman
+    if "Green Lantern" in justice_league:
+        justice_league.remove("Green Lantern")
+        justice_league.insert(aquaman_idx + 1, "Green Lantern")
+    print("After separating Aquaman and Flash:", justice_league)
+except ValueError:
+    print("Aquaman or Flash not found!")
+
+# 5. Replace list with new members
+justice_league = ["Cyborg", "Shazam", "Hawkgirl", "Martian Manhunter", "Green Arrow"]
+print("Replaced with new members:", justice_league)
+
+# 6. Sort alphabetically. New leader = index 0
+justice_league.sort()
+print("Sorted list:", justice_league)
+print("New leader (0th index):", justice_league[0])
